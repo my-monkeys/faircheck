@@ -1,0 +1,21 @@
+{
+  "name": "faircheck-poc",
+  "version": "0.1.0",
+  "description": "Faircheck — independent provably-fair verifier for crypto casinos. Paste server seed + client seed + nonce, recompute the outcome client-side.",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "NODE_OPTIONS=\"--max-old-space-size=2048\" next build",
+    "start": "NODE_ENV=production node server.js",
+    "lint": "next lint",
+    "test": "node --experimental-default-type=module scripts/test-engine.mjs"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "tailwindcss": "^4.3.0"
+  }
+}

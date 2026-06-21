@@ -1,0 +1,12 @@
+# deps (node_modules mutualisé au parent — cf. project-shared-node-modules)
+/node_modules
+# next
+/.next
+/out
+# divers
+.DS_Store
+*.pem
+.env*
+!.env.example
+npm-debug.log*
+/tmp
