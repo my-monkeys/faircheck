@@ -4,7 +4,7 @@ import Verifier from '@/components/Verifier';
 import { GAMES } from '@/lib/games-meta';
 import { CASINOS } from '@/lib/casinos';
 import { LOCALES, isLocale, lpath, fmt, hreflangMap, localeMeta, clip } from '@/lib/i18n';
-import { tc, localizedGames } from '@/lib/content';
+import { tc, localizedGames, verifierT } from '@/lib/content';
 import { SITE, NAME } from '@/lib/site';
 
 export function generateStaticParams() { return LOCALES.map((lang) => ({ lang })); }
@@ -47,7 +47,7 @@ export default async function Home({ params }) {
         </div>
       </section>
 
-      <section className="mt-8"><Verifier t={C.ui.verifier} games={games} initial="dice" /></section>
+      <section className="mt-8"><Verifier t={verifierT(lang)} games={games} initial="dice" /></section>
 
       <section className="mt-14">
         <span className="label">{H.howKicker}</span>

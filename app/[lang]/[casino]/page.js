@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Verifier from '@/components/Verifier';
 import { CASINOS, CASINO_SLUGS, getCasino, ENGINES } from '@/lib/casinos';
 import { LOCALES, isLocale, lpath, fmt, hreflangMap, localeMeta, clip } from '@/lib/i18n';
-import { tc, localizedGames } from '@/lib/content';
+import { tc, localizedGames, verifierT } from '@/lib/content';
 import { SITE } from '@/lib/site';
 
 export function generateStaticParams() {
@@ -48,7 +48,7 @@ export default async function CasinoPage({ params }) {
       <p className="lead mt-3" style={{ maxWidth: 720 }}>{C.casinos[c.slug]}</p>
       <p className="mono text-[12px] mt-2" style={{ color: 'var(--muted)' }}>{fmt(P.engineLine, { engine: engineName, year: c.established, n: c.games.length })}</p>
 
-      <div className="mt-7"><Verifier t={C.ui.verifier} games={games} initial={c.games[0]} casinoName={c.name} /></div>
+      <div className="mt-7"><Verifier t={verifierT(lang)} games={games} initial={c.games[0]} casinoName={c.name} /></div>
 
       <section className="mt-12 wrap-narrow" style={{ paddingInline: 0 }}>
         <span className="label">{fmt(P.howKicker, { casino: c.name })}</span>

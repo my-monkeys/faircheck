@@ -4,7 +4,7 @@ import Verifier from '@/components/Verifier';
 import { CASINOS, getCasino, casinoHasGame, ENGINES, PAIRS } from '@/lib/casinos';
 import { getGame } from '@/lib/games-meta';
 import { LOCALES, isLocale, lpath, fmt, hreflangMap, localeMeta, clip } from '@/lib/i18n';
-import { tc, localizedGames } from '@/lib/content';
+import { tc, localizedGames, verifierT } from '@/lib/content';
 import { SITE, UPDATED } from '@/lib/site';
 
 export function generateStaticParams() {
@@ -63,7 +63,7 @@ export default async function CasinoGamePage({ params }) {
         {fmt(C.casinoPage.engineLine, { engine: engineName, year: c.established, n: c.games.length })} · ↻ {UPDATED}
       </p>
 
-      <div className="mt-7"><Verifier t={C.ui.verifier} games={localized} initial={game} lockGame casinoName={c.name} /></div>
+      <div className="mt-7"><Verifier t={verifierT(lang)} games={localized} initial={game} lockGame casinoName={c.name} /></div>
 
       <section className="mt-12 wrap-narrow" style={{ paddingInline: 0 }}>
         <span className="label">{fmt(P.stepKicker, vars)}</span>

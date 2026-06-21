@@ -4,7 +4,7 @@ import Verifier from '@/components/Verifier';
 import { GAME_SLUGS, getGame } from '@/lib/games-meta';
 import { CASINOS } from '@/lib/casinos';
 import { LOCALES, isLocale, lpath, fmt, hreflangMap, localeMeta, clip } from '@/lib/i18n';
-import { tc, localizedGames } from '@/lib/content';
+import { tc, localizedGames, verifierT } from '@/lib/content';
 import { SITE } from '@/lib/site';
 
 export function generateStaticParams() {
@@ -50,7 +50,7 @@ export default async function GamePage({ params }) {
       <h1 className="h1 mt-2">{fmt(P.h1, { game: gc.name })}</h1>
       <p className="lead mt-3" style={{ maxWidth: 700 }}>{gc.intro}</p>
 
-      <div className="mt-7"><Verifier t={C.ui.verifier} games={localized} initial={game} lockGame /></div>
+      <div className="mt-7"><Verifier t={verifierT(lang)} games={localized} initial={game} lockGame /></div>
 
       <section className="mt-12 wrap-narrow" style={{ paddingInline: 0 }}>
         <span className="label">{fmt(P.algoKicker, { game: gc.name })}</span>

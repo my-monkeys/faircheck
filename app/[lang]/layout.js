@@ -11,7 +11,7 @@ import Footer from '@/components/Footer';
 const sans = Inter_Tight({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-sans', display: 'swap' });
 const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-mono', display: 'swap' });
 
-const UMAMI_ID = process.env.NEXT_PUBLIC_UMAMI_ID || '';
+const UMAMI_ID = process.env.NEXT_PUBLIC_UMAMI_ID || '2d3d4208-05c0-4eff-b63e-d0c796ccdbb6';
 
 export function generateStaticParams() {
   return LOCALES.map((lang) => ({ lang }));

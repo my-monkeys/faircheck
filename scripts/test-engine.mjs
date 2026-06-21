@@ -2,7 +2,7 @@
 // (requires package.json "type":"module" at run time — see build note in the script).
 import { hmacSha256, sha256Hex, toHex } from '../lib/pf/hmac.js';
 import { generateFloats } from '../lib/pf/rng.js';
-import { dice, roulette, limbo, plinko, mines, keno, wheel, hilo } from '../lib/pf/games.js';
+import { dice, roulette, limbo, plinko, mines, keno, wheel, hilo, crash } from '../lib/pf/games.js';
 
 let pass = 0, fail = 0;
 const ok = (name, cond, got) => { if (cond) { pass++; console.log(`  ok   ${name}`); } else { fail++; console.log(`  FAIL ${name}  got=${got}`); } };
@@ -35,6 +35,11 @@ const m = await mines(SEEDS, { count: 3 }); ok('mines: 3 distinct 0..24', m.resu
 const k = await keno(SEEDS);         ok('keno: 10 distinct 1..40', k.result.length === 10 && new Set(k.result).size === 10 && k.result.every((x) => x >= 1 && x <= 40), k.display);
 const w = await wheel(SEEDS, { segments: 10 }); ok('wheel in 0..9', w.result >= 0 && w.result <= 9, w.display);
 const h = await hilo(SEEDS);         ok('hilo index 0..51', h.result >= 0 && h.result <= 51, h.display);
+const CRASH_HASH = '8d1bc1b5b1c1e1f1a1b1c1d1e1f1a1b1c1d1e1f1a1b1c1d1e1f1a1b1c1d1e1f1a';
+const cr = await crash({ gameHash: CRASH_HASH });    ok('crash >= 1', cr.result >= 1, cr.display);
+const cr2 = await crash({ gameHash: CRASH_HASH });   ok('crash deterministic', cr.display === cr2.display, cr2.display);
+let crashThrew = false; try { await crash({ gameHash: 'xyz' }); } catch { crashThrew = true; }
+ok('crash rejects bad hash', crashThrew);
 
 console.log('\n# Regression snapshot (fixed seeds)  — record current outputs');
 console.log('  dice     =', d.display);
@@ -45,6 +50,7 @@ console.log('  mines    =', m.display);
 console.log('  keno     =', k.display);
 console.log('  wheel    =', w.display);
 console.log('  hilo     =', h.display);
+console.log('  crash    =', cr.display);
 
 console.log(`\n${fail === 0 ? '✅ ALL PASS' : '❌ FAILURES'}  (${pass} ok, ${fail} fail)\n`);
 process.exit(fail === 0 ? 0 : 1);
